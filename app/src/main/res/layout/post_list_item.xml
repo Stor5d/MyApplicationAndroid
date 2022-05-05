@@ -12,9 +12,9 @@
         android:layout_height="@dimen/postAvatarSize"
         android:layout_marginEnd="@dimen/commonSpacing"
         android:contentDescription="@string/author_description"
+        android:src="@drawable/ic_launcher_foreground"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/authorName"
@@ -60,7 +60,7 @@
         app:constraint_referenced_ids="avatar,date,option" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/text"
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/barrier"
@@ -73,10 +73,10 @@
         android:background="@android:color/transparent"
         android:src="@drawable/ic_baseline_favorite_border_24dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text" />
+        app:layout_constraintTop_toBottomOf="@id/content" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/likeTextCount"
+        android:id="@+id/likesTextCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -94,11 +94,11 @@
         android:layout_marginStart="16dp"
         android:background="@android:color/transparent"
         android:src="@drawable/ic_baseline_share_24dp"
-        app:layout_constraintStart_toEndOf="@id/likeTextCount"
-        app:layout_constraintTop_toBottomOf="@id/text" />
+        app:layout_constraintStart_toEndOf="@id/likesTextCount"
+        app:layout_constraintTop_toBottomOf="@id/content" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/shareTextCount"
+        android:id="@+id/sharesTextCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -116,11 +116,11 @@
         android:layout_marginEnd="8dp"
         android:background="@android:color/transparent"
         android:src="@drawable/ic_baseline_visibility_24dp"
-        app:layout_constraintEnd_toStartOf="@id/viewTextCount"
-        app:layout_constraintTop_toBottomOf="@id/text" />
+        app:layout_constraintEnd_toStartOf="@id/viewsTextCount"
+        app:layout_constraintTop_toBottomOf="@id/content" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/viewTextCount"
+        android:id="@+id/viewsTextCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

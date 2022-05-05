@@ -2,4 +2,6 @@
     <string name="app_name">NMedia</string>
     <string name="nmedia">NMedia!</string>
     <string name="author_description">Author avatar</string>
+    <string name="thousand">%1$sK</string>
+    <string name="million">%1$sM</string>
 </resources>
