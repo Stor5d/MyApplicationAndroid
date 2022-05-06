@@ -1,13 +1,18 @@
 package ru.netology.nmedia
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import ru.netology.nmedia.databinding.PostListItemBinding
+import ru.netology.nmedia.viewModel.PostViewModel
 import java.text.DecimalFormat
 import kotlin.math.floor
 
 class MainActivity : AppCompatActivity() {
+
+    private val viewModel by viewModels<PostViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -15,27 +20,16 @@ class MainActivity : AppCompatActivity() {
         val binding = PostListItemBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val post = Post(
-            id = 0L,
-            author = "Евгений",
-            content = "Первый пост Первый пост Первый пост Первый пост Первый пост Первый пост Первый пост",
-            publihed = "08.04.2022"
-        )
-        post.likes = 9999
-        post.shareCount = 9999
-        post.viewCount = 9999
-
-        binding.render(post)
-
-        binding.likeButton.setOnClickListener {
-            if (post.likeByMe && post.likes > 0) post.likes-- else post.likes++
-            post.likeByMe = !post.likeByMe
+        viewModel.data.observe(this) { post ->
             binding.render(post)
         }
 
+        binding.likeButton.setOnClickListener {
+            viewModel.onLikeClicked()
+        }
+
         binding.shareButton.setOnClickListener {
-            post.shareCount++
-            binding.render(post)
+            viewModel.onShareClicked()
         }
 
     }
