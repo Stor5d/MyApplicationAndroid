@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Нмедиа</string>
+    <string name="nmedia">Нмедиа!</string>
+    <string name="author_description">Аватар автора</string>
+    <string name="thousand">%1$sТ</string>
+    <string name="million">%1$sМ</string>
+</resources>

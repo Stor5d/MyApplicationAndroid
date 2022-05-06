@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/commonSpacing">
+
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="@dimen/postAvatarSize"
+        android:layout_height="@dimen/postAvatarSize"
+        android:layout_marginEnd="@dimen/commonSpacing"
+        android:contentDescription="@string/author_description"
+        android:src="@drawable/ic_launcher_foreground"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/authorName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/commonSpacing"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        app:layout_constraintBottom_toTopOf="@id/date"
+        app:layout_constraintEnd_toStartOf="@id/option"
+        app:layout_constraintStart_toEndOf="@id/avatar"
+        app:layout_constraintTop_toTopOf="@id/avatar"
+        tools:text="Название автора поста Название автора поста" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/commonSpacing"
+        android:ellipsize="end"
+        android:singleLine="true"
+        app:layout_constraintBottom_toBottomOf="@id/avatar"
+        app:layout_constraintEnd_toEndOf="@id/authorName"
+        app:layout_constraintStart_toEndOf="@id/avatar"
+        app:layout_constraintTop_toBottomOf="@id/authorName"
+        tools:text="04.05.2022" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/option"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_baseline_more_vert_24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="avatar,date,option" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/barrier"
+        tools:text="@tools:sample/lorem/random" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/likeButton"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_baseline_favorite_border_24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/content" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/likesTextCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textSize="16dp"
+        app:layout_constraintStart_toEndOf="@id/likeButton"
+        app:layout_constraintTop_toTopOf="@id/likeButton"
+        tools:text="555" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/shareButton"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="16dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_baseline_share_24dp"
+        app:layout_constraintStart_toEndOf="@id/likesTextCount"
+        app:layout_constraintTop_toBottomOf="@id/content" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/sharesTextCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textSize="16dp"
+        app:layout_constraintStart_toEndOf="@id/shareButton"
+        app:layout_constraintTop_toTopOf="@id/shareButton"
+        tools:text="444" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/viewButton"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_baseline_visibility_24dp"
+        app:layout_constraintEnd_toStartOf="@id/viewsTextCount"
+        app:layout_constraintTop_toBottomOf="@id/content" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/viewsTextCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/viewButton"
+        tools:text="444" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
