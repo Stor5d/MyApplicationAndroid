@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.Post
 import ru.netology.nmedia.data.PostRepository
 
-class InMemoryPostRepository() : PostRepository {
+class InMemoryPostRepository : PostRepository {
 
     private val posts
         get() = checkNotNull(data.value) {
@@ -17,10 +17,10 @@ class InMemoryPostRepository() : PostRepository {
                 id = index + 1L,
                 author = "Netology",
                 content = "Текст поста $index",
-                publihed = "07.05.2022",
-                viewCount = 999,
-                likes = 999,
-                shareCount = 999
+                published = "07.05.2022",
+                viewCount = 99,
+                likes = 99,
+                shareCount = 99
             )
         }
     )
@@ -29,8 +29,9 @@ class InMemoryPostRepository() : PostRepository {
         data.value = posts.map { post ->
             if (post.id != postId) post
             else {
-                if (post.likeByMe && post.likes > 0) post.likes-- else post.likes++
-                post.copy(likeByMe = !post.likeByMe, likes = post.likes)
+                val newLikes: Int =
+                    if (post.likeByMe && post.likes > 0) post.likes - 1 else post.likes + 1
+                post.copy(likeByMe = !post.likeByMe, likes = newLikes)
             }
         }
 
