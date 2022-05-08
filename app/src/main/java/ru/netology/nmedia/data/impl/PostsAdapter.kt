@@ -42,7 +42,7 @@ internal class PostsAdapter(
             with(binding) {
                 authorName.text = post.author
                 content.text = post.content
-                date.text = post.publihed
+                date.text = post.published
                 likesTextCount.text = likesShareViewToString(post.likes)
                 sharesTextCount.text = likesShareViewToString(post.shareCount)
                 viewsTextCount.text = likesShareViewToString(post.viewCount)
