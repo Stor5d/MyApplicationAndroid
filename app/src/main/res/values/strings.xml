@@ -4,4 +4,12 @@
     <string name="author_description">Author avatar</string>
     <string name="thousand">%1$sK</string>
     <string name="million">%1$sM</string>
+    <string name="remove">Remove</string>
+    <string name="post_text">Post Text</string>
+    <string name="menu_edit">Edit</string>
+    <string name="description_post_menu">Post menu</string>
+    <string name="description_post_like">Like</string>
+    <string name="description_post_share">Share</string>
+    <string name="description_post_save">Save</string>
+    <string name="edit_caption">Edit</string>
 </resources>
