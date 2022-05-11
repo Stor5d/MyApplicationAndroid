@@ -25,7 +25,7 @@
         android:ellipsize="end"
         android:singleLine="true"
         app:layout_constraintBottom_toTopOf="@id/date"
-        app:layout_constraintEnd_toStartOf="@id/option"
+        app:layout_constraintEnd_toStartOf="@id/menu"
         app:layout_constraintStart_toEndOf="@id/avatar"
         app:layout_constraintTop_toTopOf="@id/avatar"
         tools:text="Название автора поста Название автора поста" />
@@ -44,7 +44,7 @@
         tools:text="04.05.2022" />
 
     <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/option"
+        android:id="@+id/menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
@@ -57,14 +57,14 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="avatar,date,option" />
+        app:constraint_referenced_ids="avatar,date,menu" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/content"
+        android:id="@+id/contentEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/barrier"
-        tools:text="@tools:sample/lorem/random" />
+        tools:text="Text post Text post Text post Text post Text post Text post Text post Text post Text post Text post Text post " />
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/likeButton"
@@ -73,7 +73,7 @@
         android:background="@android:color/transparent"
         android:src="@drawable/ic_baseline_favorite_border_24dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/content" />
+        app:layout_constraintTop_toBottomOf="@id/contentEditText" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/likesTextCount"
@@ -82,7 +82,7 @@
         android:layout_marginStart="8dp"
         android:ellipsize="end"
         android:singleLine="true"
-        android:textSize="16dp"
+        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@id/likeButton"
         app:layout_constraintTop_toTopOf="@id/likeButton"
         tools:text="555" />
@@ -95,7 +95,7 @@
         android:background="@android:color/transparent"
         android:src="@drawable/ic_baseline_share_24dp"
         app:layout_constraintStart_toEndOf="@id/likesTextCount"
-        app:layout_constraintTop_toBottomOf="@id/content" />
+        app:layout_constraintTop_toBottomOf="@id/contentEditText" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/sharesTextCount"
@@ -104,7 +104,7 @@
         android:layout_marginStart="8dp"
         android:ellipsize="end"
         android:singleLine="true"
-        android:textSize="16dp"
+        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@id/shareButton"
         app:layout_constraintTop_toTopOf="@id/shareButton"
         tools:text="444" />
@@ -117,7 +117,7 @@
         android:background="@android:color/transparent"
         android:src="@drawable/ic_baseline_visibility_24dp"
         app:layout_constraintEnd_toStartOf="@id/viewsTextCount"
-        app:layout_constraintTop_toBottomOf="@id/content" />
+        app:layout_constraintTop_toBottomOf="@id/contentEditText" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/viewsTextCount"
@@ -126,7 +126,7 @@
         android:layout_marginStart="8dp"
         android:ellipsize="end"
         android:singleLine="true"
-        android:textSize="16dp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/viewButton"
         tools:text="444" />
