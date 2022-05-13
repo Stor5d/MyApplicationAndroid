@@ -3,7 +3,6 @@ package ru.netology.nmedia.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
-import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -56,6 +55,7 @@ internal class PostsAdapter(
         init {
             binding.likeButton.setOnClickListener { listener.onLikeClicked(post) }
             binding.shareButton.setOnClickListener { listener.onShareClicked(post) }
+            binding.menu.setOnClickListener { popupMenu.show() }
         }
 
         fun bind(post: Post) {
@@ -64,17 +64,11 @@ internal class PostsAdapter(
                 authorName.text = post.author
                 contentEditText.text = post.content
                 date.text = post.published
-                likesTextCount.text = likesShareViewToString(post.likes)
-                sharesTextCount.text = likesShareViewToString(post.shareCount)
-                viewsTextCount.text = likesShareViewToString(post.viewCount)
-                likeButton.setImageResource(getLikeIconResId(post.likeByMe))
-                menu.setOnClickListener { popupMenu.show() }
+                shareButton.text = likesShareViewToString(post.shareCount)
+                viewButton.text = likesShareViewToString(post.viewCount)
+                likeButton.text = likesShareViewToString(post.likes)
             }
         }
-
-        @DrawableRes
-        private fun getLikeIconResId(liked: Boolean) =
-            if (liked) R.drawable.ic_liked_24dp else R.drawable.ic_baseline_favorite_border_24dp
 
         private fun likesShareViewToString(likesOrShare: Int): String {
             val format = DecimalFormat("#.#")
@@ -97,15 +91,14 @@ internal class PostsAdapter(
             }
         }
     }
+}
 
-    private object DiffCallback : DiffUtil.ItemCallback<Post>() {
+private object DiffCallback : DiffUtil.ItemCallback<Post>() {
 
-        override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean =
-            oldItem.id == newItem.id
+    override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean =
+        oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean =
-            oldItem == newItem
-
-    }
+    override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean =
+        oldItem == newItem
 
 }

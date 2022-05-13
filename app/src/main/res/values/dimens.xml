@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="commonSpacing">4dp</dimen>
+    <dimen name="commonSpacing">16dp</dimen>
+    <dimen name="textSpacing">8dp</dimen>
     <dimen name="postAvatarSize">48dp</dimen>
+    <dimen name="iconButtonMinSize">48dp</dimen>
 </resources>
