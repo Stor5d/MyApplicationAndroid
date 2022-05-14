@@ -6,7 +6,7 @@ import ru.netology.nmedia.data.PostRepository
 
 class InMemoryPostRepository : PostRepository {
 
-    private var nextId = GENERETED_POST_AMOUNT.toLong()
+    private var nextId = GENERATED_POST_AMOUNT.toLong()
 
     private val posts
         get() = checkNotNull(data.value) {
@@ -14,15 +14,15 @@ class InMemoryPostRepository : PostRepository {
         }
 
     override val data = MutableLiveData(
-        List(GENERETED_POST_AMOUNT) { index ->
+        List(GENERATED_POST_AMOUNT) { index ->
             Post(
                 id = index + 1L,
                 author = "Netology",
                 content = "Текст поста $index",
                 published = "07.05.2022",
-                viewCount = 99,
+                viewCount = 999,
                 likes = 999,
-                shareCount = 99
+                shareCount = 999
             )
         }
     )
@@ -67,6 +67,6 @@ class InMemoryPostRepository : PostRepository {
     }
 
     companion object {
-        const val GENERETED_POST_AMOUNT = 1000
+        const val GENERATED_POST_AMOUNT = 1000
     }
 }

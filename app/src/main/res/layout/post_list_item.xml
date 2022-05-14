@@ -43,12 +43,15 @@
         app:layout_constraintTop_toBottomOf="@id/authorName"
         tools:text="04.05.2022" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/menu"
+        style="@style/Widget.App.Button.OutlinedButton.IconOnly"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_baseline_more_vert_24dp"
+        android:contentDescription="@string/description_post_menu"
+        app:icon="@drawable/ic_baseline_more_vert_24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -66,70 +69,41 @@
         app:layout_constraintTop_toBottomOf="@id/barrier"
         tools:text="Text post Text post Text post Text post Text post Text post Text post Text post Text post Text post Text post " />
 
-    <androidx.appcompat.widget.AppCompatImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/likeButton"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        style="@style/Widget.AppTheme.LikeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_baseline_favorite_border_24dp"
+        android:checkable="true"
+        android:contentDescription="@string/description_post_like"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/contentEditText" />
+        app:layout_constraintTop_toBottomOf="@id/contentEditText"
+        tools:text="100500" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/likesTextCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@id/likeButton"
-        app:layout_constraintTop_toTopOf="@id/likeButton"
-        tools:text="555" />
-
-    <androidx.appcompat.widget.AppCompatImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/shareButton"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="16dp"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_baseline_share_24dp"
-        app:layout_constraintStart_toEndOf="@id/likesTextCount"
-        app:layout_constraintTop_toBottomOf="@id/contentEditText" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/sharesTextCount"
+        style="@style/Widget.AppTheme.ShareButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@id/shareButton"
-        app:layout_constraintTop_toTopOf="@id/shareButton"
-        tools:text="444" />
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/description_post_share"
+        app:icon="@drawable/ic_baseline_share_24dp"
+        app:layout_constraintStart_toEndOf="@id/likeButton"
+        app:layout_constraintTop_toBottomOf="@id/contentEditText"
+        tools:text="100500" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/viewButton"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginEnd="8dp"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_baseline_visibility_24dp"
-        app:layout_constraintEnd_toStartOf="@id/viewsTextCount"
-        app:layout_constraintTop_toBottomOf="@id/contentEditText" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/viewsTextCount"
+        style="@style/Widget.AppTheme.ShareButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:textSize="16sp"
+        android:background="@android:color/transparent"
+        android:checkable="false"
+        android:contentDescription="@string/description_post_view"
+        app:icon="@drawable/ic_baseline_visibility_24dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/viewButton"
-        tools:text="444" />
-
+        app:layout_constraintTop_toBottomOf="@id/contentEditText"
+        tools:text="100500" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
