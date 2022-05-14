@@ -67,6 +67,7 @@ internal class PostsAdapter(
                 shareButton.text = likesShareViewToString(post.shareCount)
                 viewButton.text = likesShareViewToString(post.viewCount)
                 likeButton.text = likesShareViewToString(post.likes)
+                likeButton.isChecked=post.likeByMe
             }
         }
 
