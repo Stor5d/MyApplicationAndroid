@@ -56,6 +56,8 @@ internal class PostsAdapter(
             binding.likeButton.setOnClickListener { listener.onLikeClicked(post) }
             binding.shareButton.setOnClickListener { listener.onShareClicked(post) }
             binding.menu.setOnClickListener { popupMenu.show() }
+            binding.play.setOnClickListener { listener.onPlayClicked(post) }
+            binding.preView.setOnClickListener { listener.onPlayClicked(post) }
         }
 
         fun bind(post: Post) {
@@ -67,7 +69,9 @@ internal class PostsAdapter(
                 shareButton.text = likesShareViewToString(post.shareCount)
                 viewButton.text = likesShareViewToString(post.viewCount)
                 likeButton.text = likesShareViewToString(post.likes)
-                likeButton.isChecked=post.likeByMe
+                likeButton.isChecked = post.likeByMe
+                if (post.urlVideo.isBlank()) videoGroup.visibility =
+                    ViewGroup.GONE else videoGroup.visibility = ViewGroup.VISIBLE
             }
         }
 

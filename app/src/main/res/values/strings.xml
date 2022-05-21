@@ -13,4 +13,8 @@
     <string name="description_post_view">View</string>
     <string name="description_post_save">Save</string>
     <string name="edit_caption">Edit</string>
+    <string name="chooser_share_post">Share Post</string>
+    <string name="add_post">Add Post</string>
+    <string name="video">Video</string>
+    <string name="new_message">Enter your message</string>
 </resources>
