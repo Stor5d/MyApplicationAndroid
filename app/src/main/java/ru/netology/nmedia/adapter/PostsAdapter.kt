@@ -70,8 +70,8 @@ internal class PostsAdapter(
                 viewButton.text = likesShareViewToString(post.viewCount)
                 likeButton.text = likesShareViewToString(post.likes)
                 likeButton.isChecked = post.likeByMe
-                if (post.urlVideo.isBlank()) videoGroup.visibility =
-                    ViewGroup.GONE else videoGroup.visibility = ViewGroup.VISIBLE
+                if (post.urlVideo.isBlank()) videoGroup.visibility = ViewGroup.GONE else
+                    videoGroup.visibility = ViewGroup.VISIBLE
             }
         }
 
