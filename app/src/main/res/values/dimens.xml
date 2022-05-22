@@ -4,4 +4,5 @@
     <dimen name="textSpacing">8dp</dimen>
     <dimen name="postAvatarSize">48dp</dimen>
     <dimen name="iconButtonMinSize">48dp</dimen>
+    <dimen name="fabMargin">16dp</dimen>
 </resources>

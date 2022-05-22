@@ -69,6 +69,37 @@
         app:layout_constraintTop_toBottomOf="@id/barrier"
         tools:text="Text post Text post Text post Text post Text post Text post Text post Text post Text post Text post Text post " />
 
+    <ImageView
+        android:id="@+id/preView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:contentDescription="@string/video"
+        android:layout_marginStart="1dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/contentEditText"/>
+
+    <ImageView
+        android:id="@+id/play"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:contentDescription="@string/video"
+        android:src="@drawable/ic_baseline_play_circle_filled_24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/preView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/contentEditText" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/videoGroup"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:constraint_referenced_ids="preView,play"
+        android:visibility="gone"
+        tools:visibility="visible"/>
+
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/likeButton"
         style="@style/Widget.AppTheme.LikeButton"
@@ -78,7 +109,7 @@
         android:checkable="true"
         android:contentDescription="@string/description_post_like"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/contentEditText"
+        app:layout_constraintTop_toBottomOf="@+id/preView"
         tools:text="100500" />
 
     <com.google.android.material.button.MaterialButton
@@ -90,7 +121,7 @@
         android:contentDescription="@string/description_post_share"
         app:icon="@drawable/ic_baseline_share_24dp"
         app:layout_constraintStart_toEndOf="@id/likeButton"
-        app:layout_constraintTop_toBottomOf="@id/contentEditText"
+        app:layout_constraintTop_toBottomOf="@+id/preView"
         tools:text="100500" />
 
     <com.google.android.material.button.MaterialButton
@@ -103,7 +134,7 @@
         android:contentDescription="@string/description_post_view"
         app:icon="@drawable/ic_baseline_visibility_24dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/contentEditText"
+        app:layout_constraintTop_toBottomOf="@+id/preView"
         tools:text="100500" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

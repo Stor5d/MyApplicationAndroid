@@ -22,7 +22,8 @@ class InMemoryPostRepository : PostRepository {
                 published = "07.05.2022",
                 viewCount = 999,
                 likes = 999,
-                shareCount = 999
+                shareCount = 100,
+                urlVideo = "https://www.youtube.com/watch?v=WhWc3b3KhnY"
             )
         }
     )
