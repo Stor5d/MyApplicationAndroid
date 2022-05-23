@@ -49,6 +49,6 @@ class PostContentActivity : AppCompatActivity() {
 
     private companion object {
         private const val RESULT_KEY = "postNewContent"
-        private const val INPUT_KEY = "postNewContent"
+        private const val INPUT_KEY = "postContent"
     }
 }
