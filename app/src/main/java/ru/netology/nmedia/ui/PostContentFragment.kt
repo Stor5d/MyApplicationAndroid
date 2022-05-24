@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import ru.netology.nmedia.databinding.PostContentFragmentBinding
 
 class PostContentFragment : Fragment() {
 
-    private val initialContent
-        get() = requireArguments().getString(INITIAL_CONTENT_ARGUMENTS_KEY)
+    private val args by navArgs<PostContentFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -20,9 +20,8 @@ class PostContentFragment : Fragment() {
     ) = PostContentFragmentBinding.inflate(
         layoutInflater, container, false
     ).also { binding ->
-        binding.edit.setText(initialContent)
+        binding.edit.setText(args.initialContent)
         binding.edit.requestFocus()
-        initialContent?.let { binding.edit.setSelection(it.length) }
         binding.ok.setOnClickListener {
             onOkButtonClicked(binding)
         }
@@ -39,15 +38,7 @@ class PostContentFragment : Fragment() {
     }
 
     companion object {
-        private const val INITIAL_CONTENT_ARGUMENTS_KEY = "initialContent"
         const val REQUEST_KEY = "requestKey"
 
-        fun create(initialContent: String?) = PostContentFragment().apply {
-            arguments = createBundle(initialContent)
-        }
-
-        fun createBundle(initialContent: String?) = Bundle(1).apply {
-            putString(INITIAL_CONTENT_ARGUMENTS_KEY, initialContent)
-        }
     }
 }

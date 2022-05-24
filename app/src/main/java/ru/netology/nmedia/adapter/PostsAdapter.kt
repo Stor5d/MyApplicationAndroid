@@ -58,6 +58,10 @@ internal class PostsAdapter(
             binding.menu.setOnClickListener { popupMenu.show() }
             binding.play.setOnClickListener { listener.onPlayClicked(post) }
             binding.preView.setOnClickListener { listener.onPlayClicked(post) }
+            binding.avatar.setOnClickListener { listener.onToPost(post.id) }
+            binding.authorName.setOnClickListener { listener.onToPost(post.id) }
+            binding.date.setOnClickListener { listener.onToPost(post.id) }
+            binding.contentEditText.setOnClickListener { listener.onToPost(post.id) }
         }
 
         fun bind(post: Post) {

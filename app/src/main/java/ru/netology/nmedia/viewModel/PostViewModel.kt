@@ -20,6 +20,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application),
     val sharePostContent = SingleLiveEvent<String>()
     val navigateToPostContentScreenEvent = SingleLiveEvent<String>()
     val playPostVideo = SingleLiveEvent<String>()
+    val navigateToPostEvent = SingleLiveEvent<Long>()
 
     fun onSaveButtonClicked(content: String) {
         if (content.isBlank()) return
@@ -51,6 +52,10 @@ class PostViewModel(application: Application) : AndroidViewModel(application),
 
     override fun onPlayClicked(post: Post) {
         playPostVideo.value = post.urlVideo
+    }
+
+    override fun onToPost(postId: Long) {
+        navigateToPostEvent.value = postId
     }
     // endregion PostInteractionListener
 
