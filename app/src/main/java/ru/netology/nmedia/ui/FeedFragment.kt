@@ -14,7 +14,7 @@ import ru.netology.nmedia.viewModel.PostViewModel
 
 class FeedFragment : Fragment() {
 
-    private val viewModel by viewModels<PostViewModel>()
+    private val viewModel by activityViewModels<PostViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +38,7 @@ class FeedFragment : Fragment() {
         ) { requestKey, bundle ->
             if (requestKey != PostContentFragment.REQUEST_KEY) return@setFragmentResultListener
             val newPostContent = bundle.getString(
-                PostContentFragment.REQUEST_KEY
+                PostContentFragment.RESULT_KEY
             ) ?: return@setFragmentResultListener
             viewModel.onSaveButtonClicked(newPostContent)
         }
@@ -66,6 +66,7 @@ class FeedFragment : Fragment() {
         val adapter = PostsAdapter(viewModel)
         binding.postRecyclerView.adapter = adapter
         viewModel.data.observe(viewLifecycleOwner) { posts ->
+            println("бинда")
             adapter.submitList(posts)
         }
 

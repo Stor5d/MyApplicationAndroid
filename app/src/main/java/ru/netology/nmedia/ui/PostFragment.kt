@@ -6,23 +6,26 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResultListener
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import ru.netology.nmedia.post.Post
 import ru.netology.nmedia.R
-import ru.netology.nmedia.adapter.PostsAdapter
-import ru.netology.nmedia.databinding.FeedFragmentBinding
 import ru.netology.nmedia.databinding.PostFragmentBinding
 import ru.netology.nmedia.viewModel.PostViewModel
+import java.text.DecimalFormat
+import kotlin.math.floor
 
 class PostFragment : Fragment() {
 
-    private val viewModel by viewModels<PostViewModel>()
-    private val args by navArgs<PostContentFragmentArgs>()
+    private val viewModel by activityViewModels<PostViewModel>()
+    private val args by navArgs<PostFragmentArgs>()
+    private var postId: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val binding = PostFragmentBinding.inflate(layoutInflater)
 
         viewModel.sharePostContent.observe(this) { postContent ->
             val intent = Intent().apply {
@@ -38,28 +41,11 @@ class PostFragment : Fragment() {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(urlVideo)))
         }
 
-//        setFragmentResultListener(
-//            requestKey = PostContentFragment.REQUEST_KEY
-//        ) { requestKey, bundle ->
-//            if (requestKey != PostContentFragment.REQUEST_KEY) return@setFragmentResultListener
-//            val newPostContent = bundle.getString(
-//                PostContentFragment.REQUEST_KEY
-//            ) ?: return@setFragmentResultListener
-//            viewModel.onSaveButtonClicked(newPostContent)
-//        }
-
-//        viewModel.navigateToPostContentScreenEvent.observe(this) { initialContent ->
-//            val direction = FeedFragmentDirections.toPostContentFragment(initialContent)
-//            findNavController().navigate(direction)
-//        }
-
-//        viewModel.navigateToPostEvent.observe(this) { postId ->
-//            val direction = FeedFragmentDirections.toPostFragment(postId)
-//            findNavController().navigate(direction)
-//        }
+        viewModel.playPostVideo.observe(this) { urlVideo ->
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(urlVideo)))
+        }
 
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -68,17 +54,56 @@ class PostFragment : Fragment() {
     ) = PostFragmentBinding.inflate(
         layoutInflater, container, false
     ).also { binding ->
-        binding.postItem.likeButton.setOnClickListener{ println("Stor")}
- //       val adapter = PostsAdapter(viewModel)
- //       binding.scrollView = adapter
-//        viewModel.data.observe(viewLifecycleOwner) { posts ->
-//            adapter.submitList(posts)
-//        }
-//
-//        binding.fab.setOnClickListener {
-//            viewModel.onAddClicked()
-//        }
+        postId = args.postId
+     viewModel.getPost(postId)?.also {post->
+           bind(post, binding)
+      }
+
+        binding.postItem.likeButton.setOnClickListener { viewModel.onLikeClickedPost(postId) }
+
+        viewModel.update.observe(viewLifecycleOwner) { postId ->
+            viewModel.getPost(postId)?.also {post->
+                bind(post, binding)
+            }
+        }
+
 
     }.root
+
+    private fun bind(post: Post, binding: PostFragmentBinding) {
+        with(binding.postItem) {
+            authorName.text = post.author
+            contentEditText.text = post.content
+            date.text = post.published
+            shareButton.text = likesShareViewToString(post.shareCount)
+            viewButton.text = likesShareViewToString(post.viewCount)
+
+            likeButton.text = likesShareViewToString(post.likes)
+            likeButton.isChecked = post.likeByMe
+            if (post.urlVideo.isBlank()) videoGroup.visibility = android.view.ViewGroup.GONE else
+                videoGroup.visibility = android.view.ViewGroup.VISIBLE
+        }
+    }
+
+    private fun likesShareViewToString(likesOrShare: Int): String {
+        val format = DecimalFormat("#.#")
+        return when {
+            likesOrShare < 1_000 -> "$likesOrShare"
+            likesOrShare in 1_000..9_999 -> {
+                val text = format.format((floor(likesOrShare / 100.0)) / 10)
+                getString(R.string.thousand, text)
+
+            }
+            likesOrShare in 10_000..999_999 -> {
+                val text = (likesOrShare / 1_000).toString()
+                getString(R.string.thousand, text)
+            }
+            likesOrShare >= 1_000_000 -> {
+                val text = format.format((floor(likesOrShare / 100_000.0)) / 10)
+                getString(R.string.million, text)
+            }
+            else -> "-"
+        }
+    }
 
 }

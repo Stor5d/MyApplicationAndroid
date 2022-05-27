@@ -32,7 +32,8 @@
         android:label="PostFragment" >
         <argument
             android:name="postId"
-            app:argType="long" />
+            app:argType="long"
+            android:defaultValue="-1L" />
     </fragment>
 
 </navigation>

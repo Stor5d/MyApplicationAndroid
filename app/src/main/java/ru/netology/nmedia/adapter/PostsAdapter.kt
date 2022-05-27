@@ -6,7 +6,7 @@ import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import ru.netology.nmedia.Post
+import ru.netology.nmedia.post.Post
 import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.PostListItemBinding
 import java.text.DecimalFormat
@@ -74,6 +74,7 @@ internal class PostsAdapter(
                 viewButton.text = likesShareViewToString(post.viewCount)
                 likeButton.text = likesShareViewToString(post.likes)
                 likeButton.isChecked = post.likeByMe
+                println(post.likeByMe)
                 if (post.urlVideo.isBlank()) videoGroup.visibility = ViewGroup.GONE else
                     videoGroup.visibility = ViewGroup.VISIBLE
             }
@@ -104,10 +105,17 @@ internal class PostsAdapter(
 
 private object DiffCallback : DiffUtil.ItemCallback<Post>() {
 
-    override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean =
-        oldItem.id == newItem.id
+    override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
+        println("старый ${oldItem.likeByMe}")
+        println("новый ${newItem.likeByMe}")
+        return oldItem.id == newItem.id
+    }
 
-    override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean =
-        oldItem == newItem
+
+    override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean {
+
+        return oldItem == newItem
+    }
+
 
 }

@@ -30,8 +30,8 @@ class PostContentFragment : Fragment() {
     private fun onOkButtonClicked(binding: PostContentFragmentBinding) {
         val text = binding.edit.text
         if (!text.isNullOrBlank()) {
-            val resultBundle = Bundle()
-            resultBundle.putString(REQUEST_KEY, text.toString())
+            val resultBundle = Bundle(1)
+            resultBundle.putString(RESULT_KEY, text.toString())
             setFragmentResult(REQUEST_KEY, resultBundle)
         }
         findNavController().popBackStack()
@@ -39,6 +39,7 @@ class PostContentFragment : Fragment() {
 
     companion object {
         const val REQUEST_KEY = "requestKey"
+        const val RESULT_KEY = "resultKey"
 
     }
 }
