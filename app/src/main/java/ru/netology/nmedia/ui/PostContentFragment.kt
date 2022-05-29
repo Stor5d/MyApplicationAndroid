@@ -34,7 +34,8 @@ class PostContentFragment : Fragment() {
             resultBundle.putString(RESULT_KEY, text.toString())
             setFragmentResult(REQUEST_KEY, resultBundle)
         }
-        findNavController().popBackStack()
+        val direction = PostContentFragmentDirections.actionPostContentFragmentToFeedFragment()
+        findNavController().navigate(direction)
     }
 
     companion object {

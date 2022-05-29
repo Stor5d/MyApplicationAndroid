@@ -12,7 +12,7 @@ import kotlin.properties.Delegates
 
 class FilePostRepository(
     private val application: Application
-) : PostRepository {
+) : AppPostRepository() {
 
     private val gson = Gson()
     private val type = TypeToken.getParameterized(List::class.java, Post::class.java).type

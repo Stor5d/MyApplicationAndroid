@@ -58,10 +58,10 @@ internal class PostsAdapter(
             binding.menu.setOnClickListener { popupMenu.show() }
             binding.play.setOnClickListener { listener.onPlayClicked(post) }
             binding.preView.setOnClickListener { listener.onPlayClicked(post) }
-            binding.avatar.setOnClickListener { listener.onToPost(post.id) }
-            binding.authorName.setOnClickListener { listener.onToPost(post.id) }
-            binding.date.setOnClickListener { listener.onToPost(post.id) }
-            binding.contentEditText.setOnClickListener { listener.onToPost(post.id) }
+            binding.avatar.setOnClickListener { listener.onToPost(post) }
+            binding.authorName.setOnClickListener { listener.onToPost(post) }
+            binding.date.setOnClickListener { listener.onToPost(post) }
+            binding.contentEditText.setOnClickListener { listener.onToPost(post) }
         }
 
         fun bind(post: Post) {
@@ -74,7 +74,6 @@ internal class PostsAdapter(
                 viewButton.text = likesShareViewToString(post.viewCount)
                 likeButton.text = likesShareViewToString(post.likes)
                 likeButton.isChecked = post.likeByMe
-                println(post.likeByMe)
                 if (post.urlVideo.isBlank()) videoGroup.visibility = ViewGroup.GONE else
                     videoGroup.visibility = ViewGroup.VISIBLE
             }
@@ -105,17 +104,10 @@ internal class PostsAdapter(
 
 private object DiffCallback : DiffUtil.ItemCallback<Post>() {
 
-    override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
-        println("старый ${oldItem.likeByMe}")
-        println("новый ${newItem.likeByMe}")
-        return oldItem.id == newItem.id
-    }
+    override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean =
+        oldItem.id == newItem.id
 
-
-    override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean {
-
-        return oldItem == newItem
-    }
-
+    override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean =
+        oldItem == newItem
 
 }

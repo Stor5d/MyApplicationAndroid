@@ -10,11 +10,11 @@ import androidx.navigation.fragment.findNavController
 import ru.netology.nmedia.R
 import ru.netology.nmedia.adapter.PostsAdapter
 import ru.netology.nmedia.databinding.FeedFragmentBinding
-import ru.netology.nmedia.viewModel.PostViewModel
+import ru.netology.nmedia.viewModel.PostListViewModel
 
 class FeedFragment : Fragment() {
 
-    private val viewModel by activityViewModels<PostViewModel>()
+    private val viewModel by activityViewModels<PostListViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +48,6 @@ class FeedFragment : Fragment() {
             findNavController().navigate(direction)
         }
 
-
         viewModel.navigateToPostEvent.observe(this) { postId ->
             val direction = FeedFragmentDirections.toPostFragment(postId)
             findNavController().navigate(direction)
@@ -66,7 +65,6 @@ class FeedFragment : Fragment() {
         val adapter = PostsAdapter(viewModel)
         binding.postRecyclerView.adapter = adapter
         viewModel.data.observe(viewLifecycleOwner) { posts ->
-            println("бинда")
             adapter.submitList(posts)
         }
 

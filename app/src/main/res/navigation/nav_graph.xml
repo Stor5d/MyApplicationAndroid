@@ -24,6 +24,9 @@
             android:name="initialContent"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_postContentFragment_to_feedFragment"
+            app:destination="@id/feedFragment" />
     </fragment>
 
     <fragment
@@ -34,6 +37,12 @@
             android:name="postId"
             app:argType="long"
             android:defaultValue="-1L" />
+        <action
+            android:id="@+id/action_postFragment_to_postContentFragment"
+            app:destination="@id/postContentFragment" />
+        <action
+            android:id="@+id/action_postFragment_to_feedFragment"
+            app:destination="@id/feedFragment" />
     </fragment>
 
 </navigation>
