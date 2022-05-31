@@ -67,7 +67,17 @@ class PostDaoImpl(
               ${PostTable.Column.LIKES.columnName} = ${PostTable.Column.LIKES.columnName} + CASE WHEN ${PostTable.Column.LIKED_BY_ME.columnName} THEN -1 ELSE 1 END,
                ${PostTable.Column.LIKED_BY_ME.columnName} = CASE WHEN ${PostTable.Column.LIKED_BY_ME.columnName} THEN 0 ELSE 1 END
            WHERE ${PostTable.Column.ID.columnName} = ?;
-        """.trimIndent(), arrayOf(postId)
+        """.trimIndent(), arrayOf(postId.toString())
+        )
+    }
+
+    override fun share(postId: Long) {
+        db.execSQL(
+            """
+           UPDATE ${PostTable.NAME} SET
+              ${PostTable.Column.SHARE_COUNT.columnName} = ${PostTable.Column.SHARE_COUNT.columnName} + 1 
+           WHERE ${PostTable.Column.ID.columnName} = ?;
+        """.trimIndent(), arrayOf(postId.toString())
         )
     }
 

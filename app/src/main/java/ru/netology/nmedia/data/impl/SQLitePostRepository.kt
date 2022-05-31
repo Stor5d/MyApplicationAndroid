@@ -1,14 +1,13 @@
 package ru.netology.nmedia.data.impl
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.data.PostRepository
 import ru.netology.nmedia.db.PostDao
 import ru.netology.nmedia.post.Post
 
 class SQLitePostRepository(
-    private val dao:PostDao
-):PostRepository {
+    private val dao: PostDao
+) : PostRepository {
 
     private val posts
         get() = checkNotNull(data.value) {
@@ -40,15 +39,18 @@ class SQLitePostRepository(
     }
 
     override fun share(postId: Long) {
-        TODO("Not yet implemented")
+        dao.share(postId)
+        data.value = posts.map {
+            if (it.id != postId) it else it.copy(
+                shareCount = it.shareCount + 1
+            )
+        }
     }
 
     override fun delete(postId: Long) {
         dao.removeById(postId)
         data.value = posts.filter { it.id != postId }
     }
-
-
 
 
 }
