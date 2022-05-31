@@ -137,4 +137,10 @@
         app:layout_constraintTop_toBottomOf="@+id/preView"
         tools:text="100500" />
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/postButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:constraint_referenced_ids="authorName, avatar,date,contentEditText"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

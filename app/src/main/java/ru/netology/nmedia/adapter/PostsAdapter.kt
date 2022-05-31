@@ -6,7 +6,7 @@ import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import ru.netology.nmedia.Post
+import ru.netology.nmedia.post.Post
 import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.PostListItemBinding
 import java.text.DecimalFormat
@@ -58,6 +58,10 @@ internal class PostsAdapter(
             binding.menu.setOnClickListener { popupMenu.show() }
             binding.play.setOnClickListener { listener.onPlayClicked(post) }
             binding.preView.setOnClickListener { listener.onPlayClicked(post) }
+            binding.avatar.setOnClickListener { listener.onToPost(post) }
+            binding.authorName.setOnClickListener { listener.onToPost(post) }
+            binding.date.setOnClickListener { listener.onToPost(post) }
+            binding.contentEditText.setOnClickListener { listener.onToPost(post) }
         }
 
         fun bind(post: Post) {

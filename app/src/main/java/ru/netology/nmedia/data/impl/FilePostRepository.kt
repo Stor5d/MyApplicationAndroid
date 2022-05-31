@@ -6,13 +6,13 @@ import androidx.core.content.edit
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import ru.netology.nmedia.Post
+import ru.netology.nmedia.post.Post
 import ru.netology.nmedia.data.PostRepository
 import kotlin.properties.Delegates
 
 class FilePostRepository(
     private val application: Application
-) : PostRepository {
+) : AppPostRepository() {
 
     private val gson = Gson()
     private val type = TypeToken.getParameterized(List::class.java, Post::class.java).type
@@ -59,7 +59,6 @@ class FilePostRepository(
                 post.copy(likeByMe = !post.likeByMe, likes = newLikes)
             }
         }
-
     }
 
     override fun share(postId: Long) {

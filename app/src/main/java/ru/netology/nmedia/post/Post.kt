@@ -1,4 +1,4 @@
-package ru.netology.nmedia
+package ru.netology.nmedia.post
 
 import kotlinx.serialization.Serializable
 
