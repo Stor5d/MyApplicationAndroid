@@ -34,12 +34,12 @@ class FSMService : FirebaseMessagingService() {
 
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
-        Log.d("MessageReceived", gson.toJson(message.data))
         val data = message.data
         val serializedAction = data[Action.KEY] ?: return
         val action = Action.values().find { it.key == serializedAction } ?: return
         when (action) {
             Action.Like -> handleLikeAction(data[CONTENT_KEY] ?: return)
+            Action.NewPost -> handleNewPostAction(data[CONTENT_KEY] ?: return)
         }
     }
 
@@ -60,6 +60,28 @@ class FSMService : FirebaseMessagingService() {
                 )
             )
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .build()
+
+        NotificationManagerCompat.from(this)
+            .notify(Random.nextInt(100_000), notification)
+    }
+
+    private fun handleNewPostAction(serializationContent: String) {
+        val newPostContent = gson.fromJson(serializationContent, NewPost::class.java)
+        val notification = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_notification)
+            .setContentTitle(
+                getString(
+                    R.string.notification_user_new_post,
+                    newPostContent.userName
+                )
+            )
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setContentText("${newPostContent.contentText.substring(0, 20)}...")
+            .setStyle(
+                NotificationCompat.BigTextStyle()
+                    .bigText(newPostContent.contentText)
+            )
             .build()
 
         NotificationManagerCompat.from(this)

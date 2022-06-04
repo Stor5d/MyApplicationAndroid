@@ -2,7 +2,7 @@ package ru.netology.nmedia.service
 
 import com.google.gson.annotations.SerializedName
 
-class Like(
+class NewPost(
 
     @SerializedName("userId")
     val userId: Long,
@@ -14,6 +14,9 @@ class Like(
     val postId: Long,
 
     @SerializedName("postAuthor")
-    val postAuthor: String
+    val postAuthor: String,
 
-    )
+    @SerializedName("contentText")
+    val contentText: String
+
+)
