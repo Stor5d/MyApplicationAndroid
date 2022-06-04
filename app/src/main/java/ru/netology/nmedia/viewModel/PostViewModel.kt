@@ -2,7 +2,6 @@ package ru.netology.nmedia.viewModel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.post.Post
 import ru.netology.nmedia.adapter.PostInteractionListener
 import ru.netology.nmedia.data.PostRepository
@@ -14,43 +13,46 @@ class PostViewModel(application: Application) : AndroidViewModel(application),
     PostInteractionListener {
 
     //private val repository: PostRepository = AppPostRepository.getInstance(application)
-
-    private val repository: PostRepository =
-        SQLitePostRepository(
-            dao = AppDb.getInstance(context = application).postDao,
-        )
+    private val repository: PostRepository = SQLitePostRepository(
+        dao = AppDb.getInstance(
+            context = application
+        ).postDao
+    )
 
     val data by repository::data
 
-    private val currentPost = MutableLiveData<Post?>(null)
     val sharePostContent = SingleLiveEvent<String>()
     val navigateToPostContentScreenEvent = SingleLiveEvent<String>()
     val playPostVideo = SingleLiveEvent<String>()
     val navigateToPostEvent = SingleLiveEvent<Long>()
+    private var currentPostId: Long = -1
 
     fun onSaveButtonClicked(content: String) {
         if (content.isBlank()) return
-        val post = currentPost.value?.copy(
-            content = content
-        ) ?: Post(
-            id = PostRepository.NEW_POST_ID,
-            author = "Me",
-            content = content,
-            published = "Today"
-        )
-        repository.save(post)
-        currentPost.value = null
+        if(currentPostId==-1L) {
+            repository.insert(Post(
+                id = PostRepository.NEW_POST_ID,
+                author = "Me",
+                content = content,
+                published = "Today"
+            ))
+        } else {
+            getPost(currentPostId)?.copy(content = content)?.let { repository.update(it) }
+        }
+        currentPostId = -1
     }
 
-    override fun onLikeClicked(post: Post) = repository.like(post.id)
+    override fun onLikeClicked(post: Post) = repository.liked(post.id)
+
     override fun onShareClicked(post: Post) {
         repository.share(post.id)
         sharePostContent.value = post.content
     }
 
     override fun onRemoveClicked(post: Post) = repository.delete(post.id)
+
     override fun onEditClicked(post: Post) {
-        currentPost.value = post
+        currentPostId = post.id
         navigateToPostContentScreenEvent.value = post.content
     }
 
@@ -59,40 +61,39 @@ class PostViewModel(application: Application) : AndroidViewModel(application),
     }
 
     override fun onToPost(post: Post) {
-        currentPost.value = post
+        currentPostId = post.id
         navigateToPostEvent.value = post.id
     }
 
     fun onAddClicked() {
-        currentPost.value = null
+        currentPostId = -1
         navigateToPostContentScreenEvent.call()
     }
 
-    fun setCurrentPost(postId: Long) {
-        currentPost.value = data.value?.firstOrNull { post ->
-            post.id == postId
-        }
-    }
-
     fun onLikeClickedPost() {
-        currentPost.value?.let { repository.like(it.id) }
+        repository.liked(currentPostId)
     }
 
     fun onShareClickedPost() {
-        currentPost.value?.let { repository.share(it.id) }
-        sharePostContent.value = currentPost.value?.content
+        repository.share(currentPostId)
+        sharePostContent.value = getPost(currentPostId)?.content
     }
 
+
     fun onRemoveClickedPost() {
-        currentPost.value?.let { repository.delete(it.id) }
+        repository.delete(currentPostId)
     }
 
     fun onEditClickedPost() {
-        navigateToPostContentScreenEvent.value = currentPost.value?.content
+        navigateToPostContentScreenEvent.value = getPost(currentPostId)?.content
     }
 
     fun onPlayClickedPost() {
-        playPostVideo.value = currentPost.value?.urlVideo
+        playPostVideo.value = getPost(currentPostId)?.urlVideo
+    }
+
+    private fun getPost(postId: Long) = data.value?.firstOrNull { post ->
+        post.id == postId
     }
 
 }

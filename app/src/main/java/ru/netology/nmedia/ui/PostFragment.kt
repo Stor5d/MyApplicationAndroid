@@ -54,12 +54,10 @@ class PostFragment : Fragment() {
     ) = PostFragmentBinding.inflate(
         layoutInflater, container, false
     ).also { binding ->
-        val postId = args.postId
-        viewModel.setCurrentPost(postId)
 
         viewModel.data.observe(viewLifecycleOwner) { posts ->
             posts.firstOrNull { post ->
-                post.id == postId
+                post.id == args.postId
             }?.let { bind(it, binding) }
 
             val popupMenu by lazy {

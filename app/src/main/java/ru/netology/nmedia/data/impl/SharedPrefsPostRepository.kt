@@ -44,7 +44,7 @@ class SharedPrefsPostRepository(
         data = MutableLiveData(posts)
     }
 
-    override fun like(postId: Long) {
+    override fun liked(postId: Long) {
         posts = posts.map { post ->
             if (post.id != postId) post
             else {
@@ -69,15 +69,11 @@ class SharedPrefsPostRepository(
         posts = posts.filterNot { post -> post.id == postId }
     }
 
-    override fun save(post: Post) {
-        if (post.id == PostRepository.NEW_POST_ID) insert(post) else update(post)
-    }
-
-    private fun insert(post: Post) {
+    override fun insert(post: Post) {
         posts = listOf(post.copy(id = ++nextId)) + posts
     }
 
-    private fun update(post: Post) {
+    override fun update(post: Post) {
         posts = posts.map {
             if (post.id == it.id) post else it
         }
