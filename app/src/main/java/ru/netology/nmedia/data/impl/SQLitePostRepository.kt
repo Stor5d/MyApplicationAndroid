@@ -1,55 +1,38 @@
 package ru.netology.nmedia.data.impl
 
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.map
 import ru.netology.nmedia.data.PostRepository
 import ru.netology.nmedia.db.PostDao
+import ru.netology.nmedia.db.toEntity
+import ru.netology.nmedia.db.toModel
 import ru.netology.nmedia.post.Post
 
 class SQLitePostRepository(
     private val dao: PostDao
 ) : PostRepository {
 
-    private val posts
-        get() = checkNotNull(data.value) {
-            "Не нуль"
-        }
-
-    override val data = MutableLiveData(dao.getAll())
-
-    override fun save(post: Post) {
-        val id = post.id
-        val saved = dao.save(post)
-        data.value = if (id == 0L) {
-            listOf(saved) + posts
-        } else {
-            posts.map {
-                if (it.id != id) it else saved
-            }
-        }
+    override val data = dao.getAll().map {entities->
+        entities.map { it.toModel() }
     }
 
-    override fun like(postId: Long) {
+    override fun liked(postId: Long) {
         dao.likeById(postId)
-        data.value = posts.map {
-            if (it.id != postId) it else it.copy(
-                likeByMe = !it.likeByMe,
-                likes = if (it.likeByMe) it.likes - 1 else it.likes + 1
-            )
-        }
     }
 
     override fun share(postId: Long) {
         dao.share(postId)
-        data.value = posts.map {
-            if (it.id != postId) it else it.copy(
-                shareCount = it.shareCount + 1
-            )
-        }
     }
 
     override fun delete(postId: Long) {
         dao.removeById(postId)
-        data.value = posts.filter { it.id != postId }
+    }
+
+    override fun update(post: Post) {
+        dao.updateContentById(post.id, post.content)
+    }
+
+    override fun insert(post: Post) {
+        dao.insert(post.toEntity())
     }
 
 

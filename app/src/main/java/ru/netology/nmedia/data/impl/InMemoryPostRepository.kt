@@ -28,7 +28,7 @@ class InMemoryPostRepository : PostRepository {
         }
     )
 
-    override fun like(postId: Long) {
+    override fun liked(postId: Long) {
         data.value = posts.map { post ->
             if (post.id != postId) post
             else {
@@ -53,15 +53,11 @@ class InMemoryPostRepository : PostRepository {
         data.value = posts.filterNot { post -> post.id == postId }
     }
 
-    override fun save(post: Post) {
-        if (post.id == PostRepository.NEW_POST_ID) insert(post) else update(post)
-    }
-
-    private fun insert(post: Post) {
+    override fun insert(post: Post) {
         data.value = listOf(post.copy(id = ++nextId)) + posts
     }
 
-    private fun update(post: Post) {
+    override  fun update(post: Post) {
         data.value = posts.map {
             if (post.id == it.id) post else it
         }
