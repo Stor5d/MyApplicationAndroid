@@ -17,4 +17,8 @@
     <string name="add_post">Add Post</string>
     <string name="video">Video</string>
     <string name="new_message">Enter your message</string>
+    <string name="notification_user_liked">User %1$s liked %2$s\'s post</string>
+    <string name="channel_remote_name">Server notifications</string>
+    <string name="channel_remote_description">Notifications from remote server</string>
+    <string name="notification_user_new_post">%1$s published a new post</string>
 </resources>
